@@ -3,6 +3,7 @@ package com.kultur.egitim.pages;
 import com.kultur.egitim.method.Methods;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -21,6 +22,9 @@ public class HomePage {
 
     By searchButton = By.cssSelector("button[data-testid=\"suggestion-placeholder\"]");
     By searchInput = By.cssSelector("input[data-testid=\"browsing-search-input\"]");
+    By searchSubmitButton = By.cssSelector("button[data-testid=\"browsing-search-submit-icon\"]");
+
+    By product = By.cssSelector("a[data-testid='product-card']");
 
     public HomePage(){
         methods = new Methods();
@@ -64,7 +68,10 @@ public class HomePage {
     }
 
     public void clickSearchButton(){
-        methods.click(searchButton);
+        methods.clickElement(searchButton);
+        if (!methods.isElementVisible(searchInput,2)){
+            methods.clickJs(methods.findElement(searchButton));
+        }
     }
 
     public void inputSearch(String text){
@@ -72,6 +79,24 @@ public class HomePage {
         methods.sendKeys(searchInput, text);
         Assertions.assertTrue(methods.isElementVisible(By.cssSelector(".personalized-suggestions-container")));
     }
+
+    public void enter(){
+        methods.sendKeys(searchInput, Keys.ENTER);
+    }
+
+    public void clickSearchSubmitButton(){
+        methods.clickElement(searchSubmitButton);
+    }
+
+    public void clickProduct(){
+        methods.clickElement(product);
+    }
+
+
+
+    // button[data-testid='add-to-basket-button-button']
+
+
 
     /**
      css

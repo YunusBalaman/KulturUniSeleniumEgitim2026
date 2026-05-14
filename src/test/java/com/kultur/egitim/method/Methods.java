@@ -1,13 +1,16 @@
 package com.kultur.egitim.method;
 
 import com.kultur.egitim.driver.Driver;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Methods {
 
@@ -56,6 +59,10 @@ public class Methods {
 
     public void sendKeys(By by, String value){
         findElement(by).sendKeys(value);
+    }
+
+    public void sendKeys(By by, Keys key){
+        findElement(by).sendKeys(key);
     }
 
     public void clear(By by){
@@ -126,4 +133,23 @@ public class Methods {
                 webElement);
     }
 
+    public void clickElement(By by){
+        Assertions.assertTrue(isElementVisible(by));
+        Assertions.assertTrue(isElementClickable(by));
+        click(by);
+    }
+
+    public void clickJs(WebElement webElement){
+
+        js.executeScript("arguments[0].click();", webElement);
+    }
+
+    public List<String> getAllTabs(){
+        return new ArrayList<>(driver.getWindowHandles());
+    }
+
+    public void selectTab(int tabNumber){
+        List<String> list = getAllTabs();
+        driver.switchTo().window(list.get(tabNumber-1));
+    }
 }
