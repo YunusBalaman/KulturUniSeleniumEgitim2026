@@ -97,6 +97,16 @@ public class Methods {
         }
     }
 
+    public boolean isElementClickable(WebElement webElement){
+        try {
+            fluentWait.until(ExpectedConditions.elementToBeClickable(webElement));
+            return true;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
     public boolean isElementVisible(By by, long timeout){
         try {
             isElementVisible(by,pollingEvery,timeout);
@@ -142,6 +152,10 @@ public class Methods {
     public void clickJs(WebElement webElement){
 
         js.executeScript("arguments[0].click();", webElement);
+    }
+
+    public String getTextJs(By by){
+        return String.valueOf(js.executeScript("return arguments[0].textContent;",findElement(by)));
     }
 
     public List<String> getAllTabs(){

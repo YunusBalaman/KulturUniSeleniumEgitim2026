@@ -42,7 +42,7 @@ public class Driver {
 
     @AfterEach
     public void afterEach() {
-        //driver.quit();
+        driver.quit();
     }
 
     @AfterAll

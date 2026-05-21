@@ -21,10 +21,11 @@
     <maven.failsafe.version>3.5.5</maven.failsafe.version>
     <maven.clean.version>3.5.0</maven.clean.version>
     <maven.source.version>3.4.0</maven.source.version>
-    <maven.resources.version>3.4.0</maven.resources.version>
-    <junit5.version>6.0.3</junit5.version>
-    <junit5.platform.version>6.0.3</junit5.platform.version>
+    <maven.resources.version>3.5.0</maven.resources.version>
+    <junit5.version>6.1.0</junit5.version>
+    <junit5.platform.version>6.1.0</junit5.platform.version>
     <junit5.platform2.version>1.14.4</junit5.platform2.version>
+    <log4j.version>2.26.0</log4j.version>
   </properties>
 
   <dependencies>
@@ -85,8 +86,18 @@
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
-      <version>4.43.0</version>
+      <version>4.44.0</version>
       <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${log4j.version}</version>
     </dependency>
   </dependencies>
   <build>

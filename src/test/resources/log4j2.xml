@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout charset="UTF-8" disableAnsi="false" pattern="%highlight{%d{yyyy-MM-dd HH:mm:ss,SSS XXX} %-5p }{FATAL=bg_#ff8282 #c80000, ERROR=red, WARN=#ffee05, INFO=green, DEBUG=blue, TRACE=bg_white black}%style{ %c{1.}}{#FF5733} %style{[%C]}{#30d5c8}%style{:}{magenta}%style{%L }{#ffee05} - thread='%tid' ~ '%tn' - %style{%M}{#30d5c8}%style{ - }{#ffee05}%style{%msg%n}{#30d5c8}"/>
+        </Console>
+        <RollingRandomAccessFile name="RollingRandomAccessFile" fileName="logs/testLog-${date:yyyy-MM-dd__HH_mm_ss}.log"
+                                 filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <!--filePattern="logs/$${date:yyyy-MM}/testLog-%d{MM-dd-yyyy}-%i.log">-->
+            <PatternLayout> <charset>UTF-8</charset>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss,SSS XXX} %-5p %c{1.} [%C]:%L - thread="%tid" ~ "%tn" - %M - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+    </Appenders>
+    <Loggers>
+        <!-- avoid duplicated logs with additivity=false -->
+        <!---<Logger name="com.mkyong" level="debug" additivity="false">
+            <AppenderRef ref="LogToRollingFile"/><
+        </Logger> -->
+        <Root level="info">
+            <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="RollingRandomAccessFile"/>
+        </Root>
+    </Loggers>
+</Configuration>

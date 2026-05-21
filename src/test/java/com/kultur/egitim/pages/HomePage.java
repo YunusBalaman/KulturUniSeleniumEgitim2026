@@ -20,18 +20,33 @@ public class HomePage {
     By genderBy = By.cssSelector("div[data-testid=\"gender-card\"] .modal-action-button");
     By femaleGenderBy = By.xpath("//div[@data-testid=\"gender-card\"]//div[@class=\"modal-action-button\"][text()=\"Kadın\"]");
 
+    By logoBy = By.cssSelector("[data-testid=\"navigation-logo-component\"]");
+    By userMenuBy = By.cssSelector("[data-testid=\"user-menu\"]");
+    By favoriteBy  = By.cssSelector("[data-testid=\"favorite-menu\"]");
+    By myBasketBy = By.cssSelector("[href=\"/sepetim\"]");
+
     By searchButton = By.cssSelector("button[data-testid=\"suggestion-placeholder\"]");
+
     By searchInput = By.cssSelector("input[data-testid=\"browsing-search-input\"]");
+
     By searchSubmitButton = By.cssSelector("button[data-testid=\"browsing-search-submit-icon\"]");
 
     By product = By.cssSelector("a[data-testid='product-card']");
+    By productBrandBy = By.className("product-brand");
+    By productNameBy = By.className("product-name");
+    By productPriceBy = By.cssSelector("[data-testid=\"price-section\"] , [data-testid=\"sale-price\"] , [data-testid=\"price-value\"]");
+    By addToBasketBy = By.cssSelector("[data-testid=\"add-to-basket-button-button\"]");
 
     public HomePage(){
         methods = new Methods();
     }
 
     public HomePage verifyHomePage(){
+        Assertions.assertTrue(methods.isElementVisible(logoBy));
         Assertions.assertTrue(methods.isElementVisible(searchButton),"Search button is not visible");
+        Assertions.assertTrue(methods.isElementVisible(userMenuBy),"User menu is not visible");
+        Assertions.assertTrue(methods.isElementVisible(favoriteBy),"favorite is not visible");
+        Assertions.assertTrue(methods.isElementVisible(myBasketBy),"My basket is not visible");
         return this;
     }
 
@@ -48,6 +63,7 @@ public class HomePage {
 
     public void clickRejectCookieButton(){
         Assertions.assertTrue(methods.isElementVisible(cookieRejectionBy));
+        Assertions.assertTrue(methods.isElementClickable(cookieRejectionBy));
         methods.click(cookieRejectionBy);
     }
 
@@ -56,15 +72,11 @@ public class HomePage {
         Assertions.assertTrue(methods.isElementVisible(genderBy));
     }
 
-    public void clickRandomGenderButton(){
-        List<WebElement> genderList = methods.findElements(genderBy);
-
-        methods.click(closeGenderBy);
-    }
 
     public void clickFemaleGenderButton(){
         Assertions.assertTrue(methods.isElementVisible(femaleGenderBy));
-       methods.click(femaleGenderBy);
+        Assertions.assertTrue(methods.isElementClickable(femaleGenderBy));
+        methods.click(femaleGenderBy);
     }
 
     public void clickSearchButton(){
@@ -86,6 +98,30 @@ public class HomePage {
 
     public void clickSearchSubmitButton(){
         methods.clickElement(searchSubmitButton);
+    }
+
+    public void verifyProduct(){
+        Assertions.assertTrue(methods.isElementVisible(product));
+        Assertions.assertTrue(methods.isElementVisible(productPriceBy));
+        Assertions.assertTrue(methods.isElementVisible(productBrandBy));
+        Assertions.assertTrue(methods.isElementVisible(productNameBy));
+        Assertions.assertTrue(methods.isElementVisible(addToBasketBy));
+        Assertions.assertTrue(methods.isElementClickable(addToBasketBy));
+        Assertions.assertTrue(methods.isElementClickable(product));
+        Assertions.assertTrue(methods.isElementClickable(productPriceBy));
+        Assertions.assertTrue(methods.isElementClickable(productBrandBy));
+        Assertions.assertTrue(methods.isElementClickable(productNameBy));
+    }
+
+    public String getBrand(){
+        return methods.getText(productBrandBy);
+    }
+    public String getName(){
+        return methods.getText(productNameBy);
+    }
+
+    public String getPrice(){
+        return methods.getText(productPriceBy);
     }
 
     public void clickProduct(){
